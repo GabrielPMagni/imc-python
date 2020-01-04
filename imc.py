@@ -1,5 +1,4 @@
 #cálculo de IMC
-
 def setInfo():
 	try:
 		peso = (input('Digite seu peso em kilogramas: '))
@@ -44,20 +43,22 @@ def resultado(imc):
 		print('\033[31mVocê está com Obesidade grau II (severa)\033[m')
 	else:
 		print('\033[31mVocê está com Obesidade grau III (mórbida)\033[m')
-	continuar = input('Presione ENTER para continuar')
+	try:
+		arquivo = open(r'Histórico IMC.log', 'a')
+		arquivo.write(str(imc))
+		arquivo.write('\n')
+	except Exception as erro:
+		print('Erro arquivo: ' + str(erro))
+	finally:
+		arquivo.close()
+	input('Presione ENTER para continuar')
+	
 	return main()
 
 def supersecretarea():
 	print('\033[41m**!!ÁREA SUPER SECRETA!!**\033[m')
 
-def historico():
-	try:
-		arquivo = open(r'Histórico IMC', 'a')
-		arquivo.write()
-	except Exception as erro:
-		print('Erro: ' + str(erro))
-	finally:
-		arquivo.close()
+
 
 def main():
 	try:
@@ -75,10 +76,7 @@ def main():
 		print('Digite apenas números, tente novamente')
 		return main()
 	except Exception as erro:
-		print('Erro encontrado: ' + erro)
+		print('Erro encontrado: ' + str(erro))
 
 
 main()
-
-
-
