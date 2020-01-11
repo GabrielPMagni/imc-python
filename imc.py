@@ -1,3 +1,4 @@
+import time
 #cálculo de IMC
 def setInfo():
 	try:
@@ -15,6 +16,20 @@ def setInfo():
 	except Exception as erro:
 		print('Erro encontrado: ' + str(erro))
 		return setInfo()
+
+
+def mostrarsrc():
+	print('\033[41m**!!MOSTRAR CÓDIGO FONTE!!**\033[m')
+	try:
+		arquivo = open(r'imc.py', 'r')
+		print(arquivo.read())
+		input('Presione ENTER para continuar')
+		return main()
+	except Exception as erro:
+		print('Erro arquivo: ' + str(erro))
+	finally:
+		arquivo.close()
+
 
 
 def calcular(decisao, peso, altura):
@@ -44,9 +59,12 @@ def resultado(imc):
 	else:
 		print('\033[31mVocê está com Obesidade grau III (mórbida)\033[m')
 	try:
-		arquivo = open(r'Histórico IMC.log', 'a')
+		arquivo = open(r'Histórico IMC.html', 'a')
+		arquivo.write('<p>')
 		arquivo.write(str(imc))
-		arquivo.write('\n')
+		arquivo.write((4 * '- 	 -') + str(time.asctime()))
+		arquivo.write('</p>')
+		arquivo.write('<br>')
 	except Exception as erro:
 		print('Erro arquivo: ' + str(erro))
 	finally:
@@ -57,6 +75,21 @@ def resultado(imc):
 
 def supersecretarea():
 	print('\033[41m**!!ÁREA SUPER SECRETA!!**\033[m')
+	try:
+		arquivo = open(r'Histórico IMC.html', 'a')
+		arquivo.write('<h1 style="color:red">Você achou a área super secreta!!</h1>\n')
+		arquivo.write('<div style="width: 0px;height: 0px;border-right: 60px solid transparent;border-top: 60px solid red;border-left: 60px solid red;border-bottom: 60px solid red;border-top-left-radius: 60px;border-top-right-radius: 60px;border-bottom-left-radius: 60px;border-bottom-right-radius: 60px;"></div>\n')
+		arquivo.write('<div style="width: 0px;height: 0px;border-right: 60px solid transparent;border-top: 60px solid red;border-left: 60px solid red;border-bottom: 60px solid red;border-top-left-radius: 60px;border-top-right-radius: 60px;border-bottom-left-radius: 60px;border-bottom-right-radius: 60px;"></div>\n')
+		arquivo.write('<div style="width: 0px;height: 0px;border-right: 60px solid transparent;border-top: 60px solid red;border-left: 60px solid red;border-bottom: 60px solid red;border-top-left-radius: 60px;border-top-right-radius: 60px;border-bottom-left-radius: 60px;border-bottom-right-radius: 60px;"></div>\n')
+		arquivo.write('<div style="width: 0px;height: 0px;border-right: 60px solid transparent;border-top: 60px solid red;border-left: 60px solid red;border-bottom: 60px solid red;border-top-left-radius: 60px;border-top-right-radius: 60px;border-bottom-left-radius: 60px;border-bottom-right-radius: 60px;"></div>\n')
+		arquivo.write('<div style="width: 0px;height: 0px;border-right: 60px solid transparent;border-top: 60px solid red;border-left: 60px solid red;border-bottom: 60px solid red;border-top-left-radius: 60px;border-top-right-radius: 60px;border-bottom-left-radius: 60px;border-bottom-right-radius: 60px;"></div>\n')
+		input('Presione ENTER para continuar')
+		return main()
+	except Exception as erro:
+		print('Erro arquivo: ' + str(erro))
+	finally:
+		arquivo.close()
+
 
 
 
@@ -69,6 +102,8 @@ def main():
 			exit()	
 		elif escolha == 99:
 			return supersecretarea()
+		elif escolha == 88:
+			return mostrarsrc()
 		else:
 			print('Comando não encontrado, tente novamente')
 			return main()
@@ -78,5 +113,12 @@ def main():
 	except Exception as erro:
 		print('Erro encontrado: ' + str(erro))
 
+try:
+	arquivo = open(r'Histórico IMC.html', 'a')
+	arquivo.write('<h1 style="color:blue">Histórico de IMCs Calculados</h1>\n')
+except Exception as erro:
+	print('Erro arquivo: ' + str(erro))
+finally:
+	arquivo.close()
 
 main()
